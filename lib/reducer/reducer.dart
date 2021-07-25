@@ -1,23 +1,37 @@
-import 'package:movie_app/actions/get_movies.dart';
-import 'package:movie_app/models/app_state.dart';
+import 'package:movie_app/actions/index.dart';
+import 'package:movie_app/models/index.dart';
 import 'package:redux/redux.dart';
 
 Reducer<AppState> reducer = combineReducers(<Reducer<AppState>>[
-  TypedReducer<AppState, GetMovies>(_getMovies),
   TypedReducer<AppState, GetMoviesSuccessful>(_getMoviesSuccessful),
+  TypedReducer<AppState, GetMoviesStart>(_getMovies),
   TypedReducer<AppState, GetMoviesError>(_getMoviesError),
+  TypedReducer<AppState, SelectMovie>(_selectedMovie),
 ]);
 
-AppState _getMovies(AppState state, GetMovies action) {
-  return state.rebuild((AppStateBuilder b) => b.isLoading = true);
+AppState _getMovies(AppState state, GetMoviesStart action) {
+  return state.rebuild((AppStateBuilder b) {
+    b.isLoading = true;
+  });
 }
 
 AppState _getMoviesSuccessful(AppState state, GetMoviesSuccessful action) {
-  return state.rebuild((AppStateBuilder b) => b
-    ..isLoading = false
-    ..movies.addAll(action.movies));
+  return state.rebuild((AppStateBuilder b) {
+    b
+      ..movies.addAll(action.movies)
+      ..isLoading = false
+      ..page = state.page + 1;
+  });
 }
 
 AppState _getMoviesError(AppState state, GetMoviesError action) {
-  return state.rebuild((AppStateBuilder b) => b.isLoading = false);
+  return state.rebuild((AppStateBuilder b) {
+    b.isLoading = false;
+  });
+}
+
+AppState _selectedMovie(AppState state, SelectMovie action) {
+  return state.rebuild((AppStateBuilder b) {
+    b.selectedMovie = action.index;
+  });
 }

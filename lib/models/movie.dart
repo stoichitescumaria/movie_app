@@ -1,8 +1,4 @@
-import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
-import 'package:movie_app/models/serializers.dart';
-
-part 'movie.g.dart';
+part of models;
 
 abstract class Movie implements Built<Movie, MovieBuilder> {
   factory Movie([void Function(MovieBuilder)? updates]) = _$Movie;
@@ -13,7 +9,17 @@ abstract class Movie implements Built<Movie, MovieBuilder> {
 
   Movie._();
 
+  int get id;
+
   String get title;
+
+  @BuiltValueField(wireName: 'medium_cover_image')
+  String get image;
+
+  String get summary;
+
+  @BuiltValueField(wireName: 'large_cover_image')
+  String get largeImage;
 
   Map<String, dynamic> get json => serializers.serializeWith(serializer, this)! as Map<String, dynamic>;
 
