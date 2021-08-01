@@ -7,7 +7,7 @@ import 'package:movie_app/models/index.dart';
 
 part 'serializers.g.dart';
 
-@SerializersFor(<Type>[AppState, Movie])
+@SerializersFor(<Type>[AppState, Movie, AppUser, Review])
 Serializers serializers = (_$serializers.toBuilder() //
       ..addPlugin(StandardJsonPlugin()))
     .build();

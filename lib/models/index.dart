@@ -7,4 +7,6 @@ import 'package:movie_app/models/serializers.dart';
 
 part 'app_state.dart';
 part 'index.g.dart';
+part 'app_user.dart';
 part 'movie.dart';
+part 'review.dart';
