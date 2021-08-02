@@ -83,7 +83,7 @@ class MyHomePage extends StatelessWidget {
                     ),
                     onTap: () {
                       final Store<AppState> store = StoreProvider.of<AppState>(context);
-                      store..dispatch(SelectMovie(index))..dispatch(GetReviews());
+                      store..dispatch(SelectMovie(index))..dispatch(const GetReviews());
                       Navigator.pushNamed(context, '/movie_details');
                     },
                   );

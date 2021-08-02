@@ -39,7 +39,7 @@ class _AddReviewPageState extends State<AddReviewPage> {
                     }
                     StoreProvider.of<AppState>(context)
                       ..dispatch(AddReview(_reviewController.text))
-                      ..dispatch(GetReviews());
+                      ..dispatch(const GetReviews());
                     Navigator.of(context).pop();
                   },
                   child: const Text('Submit'),
